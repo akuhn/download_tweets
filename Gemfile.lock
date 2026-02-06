@@ -11,15 +11,17 @@ GEM
       reline (>= 0.6.0)
     reline (0.6.3)
       io-console (~> 0.5)
+    sqlite3 (2.8.1-arm64-darwin)
     x (0.14.1)
 
 PLATFORMS
   arm64-darwin-23
 
 DEPENDENCIES
-  options_by_example (~> 3.4)
-  pry (~> 0.16.0)
-  x (~> 0.14.1)
+  options_by_example
+  pry
+  sqlite3
+  x (= 0.14.1)
 
 BUNDLED WITH
    2.3.26
