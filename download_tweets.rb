@@ -11,9 +11,9 @@ require %(./document)
 
 flags = OptionsByExample.read(DATA).parse ARGV
 
-fname = flags.fetch(:argument_tokens, 'access_tokens.json')
-access_tokens = JSON.parse(File.read(fname), symbolize_names: true)
-client = X::Client.new(**access_tokens)
+credentials_file = File.read(flags.get :credentials)
+credentials = JSON.parse(credentials_file, symbolize_names: true)
+client = X::Client.new(**credentials)
 
 def encode(params)
   params.map { |name, value| "#{name}=#{[*value].join(?,)}" }.join(?&)
@@ -85,12 +85,15 @@ end
 
 
 __END__
-Downloads tweets into, lets say, a Sqlite data base, you know the one
-hardened for use on battleships and stuff like that
+Downloads his tweets--yes, all of them--into a powerhouse SQLite database,
+we’re talking the kind of database you’d find on a battleship, nobody builds
+databases like this, folks, you’re going to love it
 
 Usage: download_tweets [options] [user]
 
 Options:
-  --tokens FILE           Json file with access tokens
-  -i, --interactive       Opens debugger at the end of the script
-
+  --credentials fname   Json file with tokens (default credentials.json)
+                        The credentials file must include api_key, api_key_
+                        secret, access_token, and access_token_secret, you
+                        can generate them in the developer portal
+  -i, --interactive     Open debugger at end of this script
